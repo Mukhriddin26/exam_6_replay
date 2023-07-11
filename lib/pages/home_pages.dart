@@ -18,45 +18,50 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late int num;
+  late double price;
+
+  @override
+  void initState() {
+    num = 0;
+    price=num*1.99;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    int num = 1;
-
     return Scaffold(
       appBar: AppBar(
         leading: AppIcons.back(AppColors.white),
       ),
-      endDrawer:  Drawer(
-        child:Column(
+      endDrawer: Drawer(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-          MaterialButton(
-            onPressed: () {
-      FallbackLocale.func(
-      context, FallbackLocale.english.locale);
-      },
-          color: AppColors.white,
-          minWidth: 60,
-          child: Strings.strEnglish.tr(),
-        ),
-          MaterialButton(
-            onPressed: () {
-      FallbackLocale.func(
-      context, FallbackLocale.french.locale);
-      },
-          color: AppColors.white,
-          minWidth: 60,
-          child:Strings.strFrench.tr(),
-        ),
-          MaterialButton(
-            onPressed: () {
-      FallbackLocale.func(
-      context, FallbackLocale.russia.locale);
-      },
-          color: AppColors.white,
-          minWidth: 60,
-          child: Strings.strRussia.tr(),
-        ),
+            MaterialButton(
+              onPressed: () {
+                FallbackLocale.func(context, FallbackLocale.english.locale);
+              },
+              color: AppColors.white,
+              minWidth: 60,
+              child: Strings.strEnglish.tr(),
+            ),
+            MaterialButton(
+              onPressed: () {
+                FallbackLocale.func(context, FallbackLocale.french.locale);
+              },
+              color: AppColors.white,
+              minWidth: 60,
+              child: Strings.strFrench.tr(),
+            ),
+            MaterialButton(
+              onPressed: () {
+                FallbackLocale.func(context, FallbackLocale.russia.locale);
+              },
+              color: AppColors.white,
+              minWidth: 60,
+              child: Strings.strRussia.tr(),
+            ),
           ],
         ),
       ),
@@ -91,6 +96,7 @@ class _HomePageState extends State<HomePage> {
               height: 10,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   width: 132,
@@ -99,13 +105,19 @@ class _HomePageState extends State<HomePage> {
                       border: Border.all(width: 2, color: AppColors.grey),
                       borderRadius: BorderRadius.circular(6)),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      CupertinoButton(
+                      RawMaterialButton(
+                          constraints:
+                              const BoxConstraints(minWidth: 20, minHeight: 20),
                           onPressed: () {
                             setState(() {
-                              num += 1;
+                              num -= 1;
+                             if(num<0){
+                                num = 0;
+                              }
+                              price=num*1.99;
                             });
                           },
                           child: const Icon(
@@ -116,10 +128,13 @@ class _HomePageState extends State<HomePage> {
                         "$num",
                         style: AppTextStyles.semiBold18,
                       ),
-                      CupertinoButton(
+                      RawMaterialButton(
+                          constraints:
+                              const BoxConstraints(minWidth: 20, minHeight: 20),
                           onPressed: () {
                             setState(() {
                               num += 1;
+                              price = num * 1.99;
                             });
                           },
                           child: const Icon(
@@ -129,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                Strings.strPrice.tr(),
+                Text("\$ $price "),
               ],
             ),
             const SizedBox(

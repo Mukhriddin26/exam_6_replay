@@ -15,8 +15,6 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
 
-
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -26,8 +24,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      body:pagesList[_selectedIndex],
+      body: pagesList[_selectedIndex],
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
@@ -36,9 +33,8 @@ class _MainPageState extends State<MainPage> {
   }
 }
 
-const List<Widget> pagesList=[
-   HomePage(),
-   SearchPage(),
-   ProfilePage(),
+const List<Widget> pagesList = [
+  HomePage(),
+  SearchPage(),
+  ProfilePage(),
 ];
-
